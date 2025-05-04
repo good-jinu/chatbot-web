@@ -25,6 +25,7 @@ import { isProductionEnvironment } from '@/lib/constants';
 import { myProvider } from '@/lib/ai/providers';
 import { entitlementsByUserType } from '@/lib/ai/entitlements';
 import { postRequestBodySchema, type PostRequestBody } from './schema';
+import { createArgument } from '@/lib/ai/tools/create-argument';
 
 export const maxDuration = 60;
 
@@ -113,6 +114,7 @@ export async function POST(request: Request) {
                   'createDocument',
                   'updateDocument',
                   'requestSuggestions',
+                  'createArgument',
                 ],
           experimental_transform: smoothStream({ chunking: 'word' }),
           experimental_generateMessageId: generateUUID,
@@ -124,6 +126,7 @@ export async function POST(request: Request) {
               session,
               dataStream,
             }),
+            createArgument: createArgument(),
           },
           onFinish: async ({ response }) => {
             if (session.user?.id) {

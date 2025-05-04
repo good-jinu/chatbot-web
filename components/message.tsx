@@ -19,6 +19,7 @@ import { MessageEditor } from './message-editor';
 import { DocumentPreview } from './document-preview';
 import { MessageReasoning } from './message-reasoning';
 import { UseChatHelpers } from '@ai-sdk/react';
+import { ArgumentMessage, ArgumentMessageToolCall } from './argument';
 
 const PurePreviewMessage = ({
   chatId,
@@ -176,6 +177,8 @@ const PurePreviewMessage = ({
                           args={args}
                           isReadonly={isReadonly}
                         />
+                      ) : toolName === 'createArgument' ? (
+                        <ArgumentMessageToolCall args={args} />
                       ) : null}
                     </div>
                   );
@@ -205,6 +208,8 @@ const PurePreviewMessage = ({
                           result={result}
                           isReadonly={isReadonly}
                         />
+                      ) : toolName === 'createArgument' ? (
+                        <ArgumentMessage result={result} />
                       ) : (
                         <pre>{JSON.stringify(result, null, 2)}</pre>
                       )}
