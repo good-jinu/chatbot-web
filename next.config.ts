@@ -2,7 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   experimental: {
-    ppr: true,
+    // ppr has been merged into cacheComponents
+    // ppr: true,
   },
   images: {
     remotePatterns: [
